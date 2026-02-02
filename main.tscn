@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c8l23y27h67x5"]
+
+[sub_resource type="Environment" id="Environment_7dm0k"]
+ambient_light_source = 2
+ambient_light_color = Color(0.616325, 0.59768504, 0.5837294, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
+albedo_color = Color(0.21249649, 0.20059365, 0.12318223, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7dm0k"]
+material = SubResource("StandardMaterial3D_7dm0k")
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+
+[node name="Node3D" type="Node3D" unique_id=1131964786]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=866729837]
+environment = SubResource("Environment_7dm0k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=62106424]
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1460891445]
+transform = Transform3D(0.70710677, -0.35355338, 0.6123724, 0, 0.8660254, 0.5, -0.70710677, -0.35355338, 0.6123724, 20, 20, 20)
+projection = 1
+current = true
+size = 20.0
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=283340443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="FloorCollider" type="CollisionShape3D" parent="Floor" unique_id=1483201130]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_7dm0k")
+debug_fill = false
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor" unique_id=1232463843]
+mesh = SubResource("PlaneMesh_7dm0k")
+
+[node name="TestCube" type="RigidBody3D" parent="." unique_id=302798451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+can_sleep = false
+
+[node name="TestCubeMesh2" type="CollisionShape3D" parent="TestCube" unique_id=812144745]
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="TestCubeMesh" type="MeshInstance3D" parent="TestCube" unique_id=1653372590]
+mesh = SubResource("BoxMesh_ig7tw")

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bvx16taxfwo70"]
+
+[ext_resource type="PackedScene" uid="uid://bbyosnla53iek" path="res://props/trees/_treee_1.fbx" id="1_t2ko3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5gdgj"]
+size = Vector3(1, 1.8, 1)
+
+[node name="Node3D" type="Node3D" unique_id=1131964786]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=947395870]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1508394269]
+mesh = SubResource("BoxMesh_5gdgj")
+
+[node name="_treee_1" parent="Node3D" unique_id=932542541 instance=ExtResource("1_t2ko3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.593484, -1.1920929e-07, 0.86368585)
