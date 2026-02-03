@@ -5,6 +5,9 @@
 [sub_resource type="BoxMesh" id="BoxMesh_5gdgj"]
 size = Vector3(1, 1.8, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_t2ko3"]
+size = Vector3(0.1, 2, 4)
+
 [node name="Node3D" type="Node3D" unique_id=1131964786]
 
 [node name="Node3D" type="Node3D" parent="." unique_id=947395870]
@@ -14,3 +17,15 @@ mesh = SubResource("BoxMesh_5gdgj")
 
 [node name="_treee_1" parent="Node3D" unique_id=932542541 instance=ExtResource("1_t2ko3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.593484, -1.1920929e-07, 0.86368585)
+
+[node name="Wall_L" type="StaticBody3D" parent="." unique_id=1508744416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_L" unique_id=1094629136]
+shape = SubResource("BoxShape3D_t2ko3")
+
+[node name="Wall_R" type="StaticBody3D" parent="." unique_id=1050319268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_R" unique_id=454147973]
+shape = SubResource("BoxShape3D_t2ko3")

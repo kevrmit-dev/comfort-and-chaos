@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://c8l23y27h67x5"]
 
+[ext_resource type="Script" uid="uid://ddd30r681uhev" path="res://test_cube.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://d2ovskoqu1tt5" path="res://entities/player/player.gd" id="1_ig7tw"]
+
 [sub_resource type="Environment" id="Environment_7dm0k"]
 ambient_light_source = 2
 ambient_light_color = Color(0.616325, 0.59768504, 0.5837294, 1)
@@ -17,6 +20,19 @@ size = Vector2(50, 50)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xm2m"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h2yge"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ig7tw"]
+radius = 0.6
 
 [node name="Node3D" type="Node3D" unique_id=1131964786]
 
@@ -46,9 +62,44 @@ mesh = SubResource("PlaneMesh_7dm0k")
 [node name="TestCube" type="RigidBody3D" parent="." unique_id=302798451]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 can_sleep = false
+script = ExtResource("1_0xm2m")
 
 [node name="TestCubeMesh2" type="CollisionShape3D" parent="TestCube" unique_id=812144745]
 shape = SubResource("BoxShape3D_ig7tw")
 
 [node name="TestCubeMesh" type="MeshInstance3D" parent="TestCube" unique_id=1653372590]
 mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="InteractArea" type="Area3D" parent="TestCube" unique_id=303395500]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube/InteractArea" unique_id=1389363147]
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1527485786 node_paths=PackedStringArray("camera")]
+script = ExtResource("1_ig7tw")
+camera = NodePath("../Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1164089110]
+shape = SubResource("CapsuleShape3D_0xm2m")
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="Player" unique_id=1048336571]
+mesh = SubResource("CapsuleMesh_h2yge")
+
+[node name="Interactor" type="Area3D" parent="Player" unique_id=834301383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Interactor" unique_id=2048920794]
+shape = SubResource("SphereShape3D_ig7tw")
+
+[node name="IntercatCooldown" type="Timer" parent="Player" unique_id=1178816795]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="area_entered" from="Player/Interactor" to="Player" method="_on_interactor_area_entered"]
+[connection signal="area_entered" from="Player/Interactor" to="Player" method="_on_Interactor_area_entered"]
+[connection signal="area_exited" from="Player/Interactor" to="Player" method="_on_Interactor_area_exited"]
+[connection signal="timeout" from="Player/IntercatCooldown" to="Player" method="_on_InteractCooldown_timeout"]
